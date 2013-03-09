@@ -1,0 +1,37 @@
+﻿<!--Write a script that finds the max and min number from a sequence of numbers-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Find Min and Max in Sequence</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console">
+    </div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+	FindMinAndMax();
+        function FindMinAndMax() {
+        var counter;
+        
+            var findArr=new Array(3,23,-34,2,1,0,-3434,23333,-232);
+            var min = findArr[0];
+            var max = findArr[0];
+
+            for (counter = 0; counter < findArr.length; counter++) {
+                if (findArr[counter] < min) {
+                    min = findArr[counter];
+                }
+                if (findArr[counter] > max) {
+                    max = findArr[counter];
+                }
+            }
+          
+            jsConsole.writeLine("The smallest number is: "+ min);
+            jsConsole.writeLine("The biggest number is: "+ max);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{375620CC-CB31-4AE8-B0C8-A903AA64207C}"
+	ProjectSection(SolutionItems) = preProject
+		01. PrintNumbers1_N.html = 01. PrintNumbers1_N.html
+		02. PrintNumbersNotDivible21.html = 02. PrintNumbersNotDivible21.html
+		03. FindMinAndMax.html = 03. FindMinAndMax.html
+		04. Properties.html = 04. Properties.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
