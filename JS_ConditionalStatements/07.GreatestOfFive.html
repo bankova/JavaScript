@@ -1,0 +1,40 @@
+﻿<!--Write a script that finds the greatest of given 5 variables.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>FindBiggestOfFive</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var first = -3.5;
+        var second = 15;
+        var third = -5;
+        var fourth = 0;
+        var fifth = -4;
+
+        var biggest = first;
+
+        if (second > biggest) {
+            biggest = second;
+        }
+        if (third > biggest) {
+            biggest = third;
+        }
+        if (fourth > biggest) {
+            biggest = fourth;
+        }
+        if (fifth > biggest) {
+            biggest = fifth;
+        }
+        jsConsole.writeLine("The biggest is: " + biggest);
+          
+    </script>
+</body>
+</html>

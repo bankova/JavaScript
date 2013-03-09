@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5F766FAF-E2C9-40D4-AD37-601AB792C522}"
+	ProjectSection(SolutionItems) = preProject
+		01. OddOrEven.html = 01. OddOrEven.html
+		02. DividedBy5and7.html = 02. DividedBy5and7.html
+		03. Rectangle.html = 03. Rectangle.html
+		04. CheckThirdDigit.html = 04. CheckThirdDigit.html
+		05. CheckThirdBit.html = 05. CheckThirdBit.html
+		06.PointInCircle.html = 06.PointInCircle.html
+		07. PrimeNumber.html = 07. PrimeNumber.html
+		08. TrapezoidsArea.html = 08. TrapezoidsArea.html
+		09. PointCircleRectangle.html = 09. PointCircleRectangle.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

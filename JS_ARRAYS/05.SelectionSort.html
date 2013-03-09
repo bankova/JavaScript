@@ -1,0 +1,63 @@
+﻿<!--Sorting an array means to arrange its elements in increasing order. Write a script to sort an array. 
+Use the "selection sort" algorithm: Find the smallest element, move it at the first position, 
+find the smallest from the rest, move it at the second position, etc.Hint: Use a second array.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Selection Sort</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var arr = new Array(-10, 3, 2, -1, 3, 4, 10, 2, 2, 4,-15);
+        var sortedArr = new Array(arr.length);
+
+        for (var i = 0; i < sortedArr.length; i++) {
+            sortedArr[i] = 0;
+        }
+
+        jsConsole.writeLine("The unsorted array is:");
+        PrintArray(arr);
+        jsConsole.writeLine();
+
+        SelectionSort(arr);
+
+        function SelectionSort(arr) {
+            var counter = 0;
+            var j = 0;
+            var smallest = 0;
+            var positionSmallest = 0;
+
+            while (counter < sortedArr.length) {
+                for (j = 0; j < arr.length; j++) {
+                    if (j == 0) {
+                        smallest = arr[j];
+                        positionSmallest = j; //we assume the first element is the smallest
+                    }
+                    if (arr[j] < smallest) {
+                        smallest = arr[j];
+                        positionSmallest = j; // if we find smaller then assign the smallest variable this value
+                    }
+                    if (j == arr.length - 1) {
+                        sortedArr[counter] = arr[positionSmallest]; //if we are at the end of the array, we save the
+                        arr.splice(positionSmallest, 1);   // smallest into the new array and remove smallest value from the original array
+                    }
+                }
+                counter++;
+            }
+            jsConsole.writeLine("The sorted array is:");
+            PrintArray(sortedArr);
+        }
+        function PrintArray(arr) {
+            for (counter = 0; counter < arr.length; counter++) {
+                jsConsole.write(arr[counter] + " ")
+            }
+        }
+    </script>
+</body>
+</html>

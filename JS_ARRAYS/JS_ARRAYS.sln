@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{39AF7331-9FF8-4E55-9AE5-15FC2670D2F6}"
+	ProjectSection(SolutionItems) = preProject
+		01. Array20Integers.html = 01. Array20Integers.html
+		02.CharArrays.html = 02.CharArrays.html
+		03. FindMaxSeqEqualElements.html = 03. FindMaxSeqEqualElements.html
+		04. FindMaxIncreasingSeq.html = 04. FindMaxIncreasingSeq.html
+		05.SelectionSort.html = 05.SelectionSort.html
+		06.MostFrequent.html = 06.MostFrequent.html
+		07.BinarySearch.html = 07.BinarySearch.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

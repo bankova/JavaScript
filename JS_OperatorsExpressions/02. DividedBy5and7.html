@@ -1,0 +1,33 @@
+﻿<!--Write a boolean expression that checks for given integer if it can be divided (without remainder) by 7 and 5 
+in the same time.-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CheckDivisable5and7</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+   <!-- <label for="number">
+        Enter integer number:
+    </label>
+    <input type="text" id="number" />-->
+    <div id="js-console">
+    </div>
+    <!--<a href="#" onclick="OddorEven()">Check if the entered number could be divided to 5 and 7 in the same time:</a>-->
+    <script src="scripts/js-console.js"></script>
+    <script>
+//        function OddorEven() {
+            var toCheck = 26;
+
+            if (toCheck % 35 == 0) {
+                jsConsole.writeLine("The number " + toCheck + " could be divided by 5 and 7 in the same time");
+            }
+            else {
+                jsConsole.writeLine("The number " + toCheck + " could NOT be divided by 5 and 7 in the same time");
+            }
+        //}
+    </script>
+</body>
+</html>

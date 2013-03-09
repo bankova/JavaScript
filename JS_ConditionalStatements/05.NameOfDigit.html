@@ -1,0 +1,67 @@
+﻿<!--Write script that asks for a digit and depending on the input shows
+ the name of that digit (in English) using a switch statement.-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NameOfDigit</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+    <style>
+        #digit
+        {
+            border: 1px solid black;
+            padding: 5px 15px;
+            background-color: black;
+            color: white;
+            font-family: Consolas;
+            margin-bottom: 5px;
+        }
+        
+        a
+        {
+            color: black;
+            border: 1px solid black;
+            padding: 5px 15px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 15px 0;
+        }
+        
+        a:hover
+        {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <label for="digit"> Please enter one digit only:</label>
+    <input type="text" id="digit" />
+    <br />
+    <a href="#" onclick="onDigitButtonClick()">Check the name of the digit</a>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+        function onDigitButtonClick() {
+            var digitIndex = jsConsole.readInteger("#digit")
+            var digitName;
+
+            switch (digitIndex) {
+
+                case 0: digitName = "zero"; break;
+                case 1: digitName = "one"; break;
+                case 2: digitName = "two"; break;
+                case 3: digitName = "three"; break;
+                case 4: digitName = "four"; break;
+                case 5: digitName = "five"; break;
+                case 6: digitName = "six"; break;
+                case 7: digitName = "seven"; break;
+                case 8: digitName = "eigth"; break;
+                case 9: digitName = "nine"; break;
+                default: jsConsole.writeLine("Invalid input! One digit ONLY!"); break;
+            }
+            jsConsole.writeLine(digitName);
+        }
+        
+    </script>
+</body>
+</html>

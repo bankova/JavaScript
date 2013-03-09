@@ -1,0 +1,83 @@
+﻿<!--Write a script that enters the coefficients a, b and c of a quadratic equation a*x2 + b*x + c = 0
+		and calculates and prints its real roots. Note that quadratic equations may have 0, 1 or 2 real roots.-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>QuadraticEquation</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+    <style>
+        #coefA, #coefB, #coefC
+        {
+            border: 1px solid black;
+            padding: 5px 15px;
+            background-color: black;
+            color: white;
+            font-family: Consolas;
+            margin-bottom: 5px;
+        }
+        
+        a
+        {
+            color: black;
+            border: 1px solid black;
+            padding: 5px 15px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 15px 0;
+        }
+        
+        a:hover
+        {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <label for="coefA">
+        Please enter coefficient A:</label>
+    <input type="text" id="coefA" />
+    <label for="coefB">
+        Please enter coefficient B:</label>
+    <input type="text" id="coefB" />
+    <label for="coefC">
+        Please enter coefficient C:</label>
+    <input type="text" id="coefC" />
+    <br />
+    <a href="#" onclick="CalculateRoots()">Calculate the roots of the equation:</a>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+        function CalculateRoots() {
+        var coefA = jsConsole.readFloat("#coefA");//2;
+        var coefB = jsConsole.readFloat("#coefB"); //3;
+        var coefC = jsConsole.readFloat("#coefC"); //-5;
+
+        jsConsole.writeLine("The equation is (" + coefA + ")x^2+(" + coefB + ")x+(" + coefC + ")=0");
+
+        var discriminanta = (coefB * coefB) - (4 * coefA * coefC);
+
+        if (coefA == 0 && coefB == 0 && coefC == 0) {
+            jsConsole.writeLine("Each x is solution");
+        }
+        else if (coefA == 0 && coefB == 0 && coefC != 0) {
+            jsConsole.writeLine("There are no real roots.")
+        }
+        else if (coefA == 0 && coefB != 0) {
+            jsConsole.writeLine("The root is: " + (-coefC / coefB));
+        }
+        else if (discriminanta < 0) {
+            jsConsole.writeLine("There are no real roots.")
+        }
+        else if (discriminanta == 0) {
+            jsConsole.writeLine("The only double root is: " + (-coefB) / (2 * coefA));
+        }
+        else {
+        var root1=(-coefB + (Math.sqrt(discriminanta))) / (2 * coefA);
+        var root2=(-coefB - (Math.sqrt(discriminanta))) / (2 * coefA);
+            jsConsole.writeLine("There are two roots x1=" +root1  + " and x2=" + root2);
+        }
+        }
+    </script>
+</body>
+</html>

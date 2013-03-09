@@ -1,0 +1,37 @@
+﻿<!--Write a script that compares two char arrays lexicographically (letter by letter).-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Compare Char Arrays</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var firstArray = "abcde"; //strings are char arrays
+        var secondArray = "hello!";
+        CompareCharArrays(firstArray, secondArray);
+        firstArray = "ninja"; //strings are char arrays
+        secondArray = "hello!";
+        CompareCharArrays(firstArray, secondArray);
+        firstArray = "hi"; //strings are char arrays
+        secondArray = "hi";
+        CompareCharArrays(firstArray, secondArray);
+
+        function CompareCharArrays(firstArray, secondArray) {
+            if (firstArray.localeCompare(secondArray) < 0) {
+                jsConsole.writeLine("The first char array '"+ firstArray +"' is before the second '" +secondArray+"'");
+            }
+            else if (firstArray.localeCompare(secondArray) > 0) {
+                jsConsole.writeLine("The second char array '" + secondArray + "' is before the first '" + firstArray + "'");
+            }
+            else {
+                jsConsole.writeLine("The arrays '"+firstArray+"' and '"+secondArray+ "' "+ "are equal.");
+            }
+        }      
+    </script>
+</body>
+</html>

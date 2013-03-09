@@ -1,0 +1,29 @@
+﻿<!--Write an if statement that examines two integer variables and exchanges
+ their values if the first one is greater than the second one.-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SwapVariables</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var smaller = 10;
+        var bigger = 5;
+        jsConsole.writeLine("The first variable is " + smaller + " and the second is " + bigger)
+
+
+        if (smaller > bigger) {
+            smaller = smaller ^ bigger; //Swaps the values  
+            bigger = smaller ^ bigger; //of smaller and bigger
+            smaller = smaller ^ bigger; //with use of XOR operator without third temp variable
+        }
+
+        jsConsole.writeLine("After the exchange the first variable is " + smaller + " and the second is " + bigger)
+    </script>
+</body>
+</html>

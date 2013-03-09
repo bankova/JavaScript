@@ -1,0 +1,74 @@
+﻿<!--Write a program that finds the index of given element in a sorted array of integers by 
+using the binary search algorithm (find it in Wikipedia)
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Binary Search</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var arr = new Array(4, 1, 1, 4, 2, 3, 4, 4, 1, 22, 4, 9, 3);
+
+        var searchedNumber = 2;
+        var searchedNumber2 = -15;
+        var searchedNumber3 = 22;
+
+        jsConsole.writeLine("The array is:");
+        PrintArray(arr);
+        jsConsole.writeLine();
+
+        arr.sort(orderby);
+        jsConsole.writeLine("The sorted array is:");
+        PrintArray(arr);
+        jsConsole.writeLine();
+
+        BinarySearch(arr, searchedNumber);
+        BinarySearch(arr, searchedNumber2);
+        BinarySearch(arr, searchedNumber3);
+
+
+        function BinarySearch(arr, searchedNumber) {
+            var start = 0;
+            var end = arr.length - 1;
+            var middle;
+
+            var numberExists = false;
+            while (start <= end) {
+                middle = parseInt((start + end) / 2);//if you do not use parseint function the loop is endless
+                if (arr[middle] == searchedNumber) {
+                    numberExists = true;
+                    jsConsole.writeLine();
+                    jsConsole.writeLine("The index of the number " + searchedNumber + " in the sorted array is " + middle);
+                    break;
+                }
+                if (arr[middle] < searchedNumber) {
+                    start = middle + 1;
+                }
+                if (arr[middle] > searchedNumber) {
+                    end = middle - 1;
+                }
+            }
+
+            if (numberExists == false) {
+                jsConsole.writeLine();
+                jsConsole.writeLine("The number " + searchedNumber + " you are searching for does not exist in the array.");
+            }
+        }
+        function orderby(a, b) {
+            return ((a == b) ? 0 : (a > b) ? 1 : -1);
+        }
+
+        function PrintArray(arr) {
+            for (counter = 0; counter < arr.length; counter++) {
+                jsConsole.write(arr[counter] + " ")
+            }
+        }
+    </script>
+</body>
+</html>

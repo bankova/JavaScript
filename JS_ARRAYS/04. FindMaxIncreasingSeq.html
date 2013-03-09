@@ -1,0 +1,70 @@
+﻿<!--Write a script that finds the maximal increasing sequence in an array. Example: {3, 2, 3, 4, 2, 2, 4}  {2, 3, 4}.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Max Sequence Equal Elements</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var arr = new Array(3, 2, -1, 3, 4, 10, 2, 2, 4);
+
+        jsConsole.writeLine("The elements in the array are:");
+        PrintArray(arr);
+        jsConsole.writeLine();
+        FindMaxIncreasingSeq(arr);
+
+        function FindMaxIncreasingSeq(arr) {
+            var counter;
+            var currentLen = 1;
+            var bestLen = 1;
+            var increasingElementsExist = false;
+            var bestLenIndex = 0;
+
+            for (counter = 1; counter < arr.length; counter++) {
+                if (arr[counter] > arr[counter - 1]) {
+                    currentLen++;
+                    increasingElementsExist = true;
+                }
+                if (counter == arr.length - 1) {
+                    if (currentLen > bestLen) {
+                        bestLen = currentLen;
+                        bestLenIndex = counter;
+                    }
+                }
+                if (arr[counter] <= arr[counter - 1]) {
+                    if (currentLen > bestLen) {
+                        bestLen = currentLen;
+                        bestLenIndex = counter - 1;
+                    }
+                    currentLen = 1;
+                }
+            }
+
+            jsConsole.writeLine("The max sequence of increasing elements is " + bestLen);
+            jsConsole.write("{");
+            PrintMaxIncreasingElement(arr,bestLenIndex,bestLen);
+        }     
+        function PrintArray(arr) {
+            for (counter = 0; counter < arr.length; counter++) {
+                jsConsole.write(arr[counter] + " ")
+            }
+        }
+        function PrintMaxIncreasingElement(arr, bestLenIndex, bestLen) {
+            for (counter = bestLenIndex - bestLen + 1; counter <= bestLenIndex; counter++) {
+                if (counter == bestLenIndex) {
+                    jsConsole.writeLine(arr[counter] + "}")
+                }
+                else {
+                    jsConsole.write(arr[counter] + ", ");
+                }
+            }
+        }     
+    </script>
+</body>
+</html>

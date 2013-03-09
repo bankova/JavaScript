@@ -1,0 +1,29 @@
+﻿<!--Write an expression that checks if given point (x,  y) is within a circle K(O, 5).-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>PointInCircle</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var xValueOfPoint = 1;
+        var yValueOfPoint = 1;
+        
+        if ((Math.pow(xValueOfPoint, 2) + Math.pow(yValueOfPoint, 2)) <= Math.pow(5, 2)) 
+        {
+            jsConsole.writeLine("The point is within the circle K(0,5).")
+
+        }
+        else {
+            jsConsole.writeLine("The point is outside the circle K(0,5).")
+        }
+          
+    </script>
+</body>
+</html>

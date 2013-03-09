@@ -1,0 +1,66 @@
+﻿<!--Write a script that finds the maximal sequence of equal elements in an array.
+		Example: {2, 1, 1, 2, 3, 3, 2, 2, 2, 1}  {2, 2, 2}.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Max Sequence Equal Elements</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var arr = new Array(20, 10, -23, 1, 1, 5, 5, 5, -3, -3, -3, -3, -3, 4, 5, 5);
+
+        jsConsole.writeLine("The elements in the array are:");
+        PrintArray(arr);
+        jsConsole.writeLine();
+
+        FindMaxEqualSeq(arr);
+
+        function FindMaxEqualSeq(arr) {
+            var counter;
+            var currentLen = 1;
+            var bestLen = 1;
+            var equalElementsExist = false;
+            var equalElement = 0;
+
+            for (counter = 1; counter < arr.length; counter++) {
+                if (arr[counter] == arr[counter - 1]) {
+                    equalElementsExist = true;
+                    currentLen++;
+                }
+                if (arr[counter] != arr[counter - 1] || counter == arr.length - 1) {
+                    if (currentLen > bestLen) {
+                        bestLen = currentLen;
+                        equalElement = arr[counter - 1];
+                    }
+                    currentLen = 1;
+                }
+            }
+
+            jsConsole.write("{");
+            PrintMaxEqualElement(arr,bestLen,equalElement);
+
+            jsConsole.writeLine("The max sequence of equal elements is " + bestLen);
+            if (equalElementsExist == true) {
+                jsConsole.writeLine("The value of equal elements is " + equalElement);
+            }
+        }
+        function PrintArray(arr) {
+            for (counter = 0; counter < arr.length; counter++) {
+                jsConsole.write(arr[counter] + " ")
+            }
+        }
+        function PrintMaxEqualElement(arr,bestLen,equalElement) {
+            for (counter = 0; counter < bestLen; counter++) {
+                jsConsole.write(equalElement + " ")
+            }
+            jsConsole.writeLine("}");
+        }     
+    </script>
+</body>
+</html>

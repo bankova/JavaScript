@@ -1,0 +1,65 @@
+﻿<!--Write a program that finds the most frequent number in an array. Example:
+	{4, 1, 1, 4, 2, 3, 4, 4, 1, 2, 4, 9, 3}  4 (5 times)-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Most Frequent</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var arr = new Array(4, 1, 1, 4, 2, 3, 4, 4, 1, 2, 4, 9, 3);
+        FindMostFrequent(arr);
+
+        function FindMostFrequent(arr) {
+            var freqArr = new Array(arr.length);
+
+            for (var i = 0; i < freqArr.length; i++) {
+                freqArr[i] = 0;
+            }
+
+            jsConsole.writeLine("The array is:");
+            PrintArray(arr);
+            jsConsole.writeLine();
+
+            var counter = 0;
+            var j = 0;
+
+            while (counter < arr.length) {
+                for (j = counter; j < arr.length; j++) {
+
+                    if (arr[j] == arr[counter]) {
+                        freqArr[j]++;
+                    }
+                }
+                counter++;
+            }
+            var maxFrequency = 1;
+            var positionMaxFreq = 0;
+
+            for (j = 0; j < freqArr.length; j++) {
+                if (freqArr[j] > maxFrequency) {
+                    maxFrequency = freqArr[j];
+                    positionMaxFreq = j;
+                }
+            }
+            if (maxFrequency == 1) {
+                jsConsole.writeLine("All elements are different. The most frequent number is each of them with frequency 1.")
+
+            }
+            else {
+                jsConsole.writeLine("The most frequent number is " + arr[positionMaxFreq] + " (" + maxFrequency + " times).")
+            }
+        }
+        function PrintArray(arr) {
+            for (counter = 0; counter < arr.length; counter++) {
+                jsConsole.write(arr[counter] + " ")
+            }
+        }
+    </script>
+</body>
+</html>

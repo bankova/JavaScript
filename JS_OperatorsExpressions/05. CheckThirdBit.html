@@ -1,0 +1,29 @@
+﻿<!--Write a boolean expression for finding if the bit 3 (counting from 0) of a given integer is 1 or 0.-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>CheckThirdBit</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var numToCheck = 15;
+        //var numToCheck = 1;
+        
+        var mask = 1 << 3;
+        var numAndMask = numToCheck & mask;
+        var bitThree = numAndMask >> 3;
+
+        var bitThreeIsOne=(bitThree==1)
+
+        jsConsole.writeLine("The bit 3 of the number "+numToCheck+ " is one: "+bitThreeIsOne);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F2494351-0835-426B-9374-B056F2820C48}"
+	ProjectSection(SolutionItems) = preProject
+		01.ExchangeValues.html = 01.ExchangeValues.html
+		02. SignOfProduct.html = 02. SignOfProduct.html
+		03. FindBiggest.html = 03. FindBiggest.html
+		04. SortDescending.html = 04. SortDescending.html
+		05.NameOfDigit.html = 05.NameOfDigit.html
+		06. QuadraticEquation.html = 06. QuadraticEquation.html
+		07.GreatestOfFive.html = 07.GreatestOfFive.html
+		08.ConvertToWords.html = 08.ConvertToWords.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

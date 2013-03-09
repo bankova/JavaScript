@@ -1,0 +1,105 @@
+﻿<!--Write a script that converts a number in the range [0...999] to a text corresponding to its English pronunciation. Examples:
+	0  "Zero"
+	273  "Two hundred seventy three"
+	400  "Four hundred"
+	501  "Five hundred and one"
+	711  "Seven hundred and eleven"-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>PronounciationOfNumber</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+    <style>
+        #number
+        {
+            border: 1px solid black;
+            padding: 5px 15px;
+            background-color: black;
+            color: white;
+            font-family: Consolas;
+            margin-bottom: 5px;
+        }
+        
+        a
+        {
+            color: black;
+            border: 1px solid black;
+            padding: 5px 15px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 15px 0;
+        }
+        
+        a:hover
+        {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <label for="number">
+        Please enter integer number:</label>
+    <input type="text" id="number" />
+    <br />
+    <a href="#" onclick="PronounceInt()">Check the pronounciation of the number:</a>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+        function PronounceInt() {
+            var numToPronounce = jsConsole.readInteger("#number");
+            var hundreds = parseInt(numToPronounce / 100);
+            var tens = parseInt((numToPronounce % 100) / 10);
+            var units = parseInt((numToPronounce % 100) % 10);
+
+            var unitsPronounciation = new Array("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"); //masiv
+            var teens = new Array("ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen");
+            var tensArray = new Array(" ", " ", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety");
+
+            if (numToPronounce >= 0 && numToPronounce < 1000) {
+                if (numToPronounce < 10) //prononciation of one digit numbers
+                {
+                    jsConsole.writeLine(unitsPronounciation[units]);
+                }
+                if (numToPronounce > 9 && numToPronounce < 20) //pronounciation of teens
+                {
+                    jsConsole.writeLine(teens[units]);
+                }
+                if (numToPronounce > 19 && numToPronounce < 100) {
+                    if (units == 0) {
+                        jsConsole.writeLine(tensArray[tens]);
+                    }
+                    else {
+                        jsConsole.writeLine(tensArray[tens] + " " + unitsPronounciation[units]);
+                    }
+                }
+                if (numToPronounce > 99) {
+                    if (units > 0 && tens < 1) {
+                        jsConsole.writeLine(unitsPronounciation[hundreds] + " hundred and " + unitsPronounciation[units]);
+                    }
+                    if (tens > 0 && tens < 2) //teens are special case
+                    {
+                        jsConsole.writeLine(unitsPronounciation[hundreds] + " hundred and " + teens[units]);
+                    }
+                    if (tens >= 2) {
+                        if (units == 0) {
+                            jsConsole.writeLine(unitsPronounciation[hundreds] + " hundred and " + tensArray[tens]);
+                        }
+                        else {
+                            jsConsole.writeLine(unitsPronounciation[hundreds] + " hundred " + tensArray[tens] + " " + unitsPronounciation[units]);
+                        }
+                    }
+                    if (units == 0 && tens == 0)  //100, 200,300,400...900 are special cases
+                    {
+                        jsConsole.writeLine(unitsPronounciation[hundreds] + " hundred");
+                    }
+                }
+            }
+            else {
+                jsConsole.writeLine("Invalid input. Please enter integer between 0 and 999.");
+            }
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+﻿<!--Write a script that allocates array of 20 integers and initializes
+ each element by its index multiplied by 5. Print the obtained array on the console.-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Array 20 integers</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+            var Array20 = new Array(20);
+            var counter;
+            for (counter = 0; counter < Array20.length; counter++) {
+                Array20[counter] = counter * 5;
+                jsConsole.write(Array20[counter] + " ")
+            }      
+    </script>
+</body>
+</html>

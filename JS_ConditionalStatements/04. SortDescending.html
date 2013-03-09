@@ -1,0 +1,49 @@
+﻿<!--Sort 3 real values in descending order using nested if statements.-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>SortDescending</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console">
+    </div>
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var first = 0;
+        var second = 55;
+        var third = -9.9;
+
+        jsConsole.writeLine("The first variable is " + first + " and the second is " + second + " and the third is " + third)
+
+        if (first >= second) {
+            if (first >= third) {
+                if (second >= third) {
+                    jsConsole.writeLine("The numbers in descending order are: " + first + " " + second + " " + third)
+                }
+                else {
+                    jsConsole.writeLine("The numbers in descending order are: " + first + " " + third + " " + second)
+                }
+            }
+            else {
+                jsConsole.writeLine("The numbers in descending order are: " + third + " " + first + " " + second)
+            }
+        }
+        else {
+            if (second >= third) {
+                if (third >= first) {
+                    jsConsole.writeLine("The numbers in descending order are: " + second + " " + third + " " + first)
+                }
+                else {
+                    jsConsole.writeLine("The numbers in descending order are: " + second + " " + first + " " + third)
+                }
+            }
+            else {
+                jsConsole.writeLine("The numbers in descending order are: " + third + " " + second + " " + first)
+            }
+        }
+    
+    </script>
+</body>
+</html>
