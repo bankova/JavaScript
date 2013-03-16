@@ -1,0 +1,43 @@
+﻿<!--Write a function that returns the last digit of given integer as an English word. Examples: 512 
+ "two", 1024  "four", 12309  "nine"
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Say Last Digit</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var number = 512;
+        SayLastDigit(number);
+        number = 1024;
+        SayLastDigit(number);
+        number = -12309;
+        SayLastDigit(number);
+
+        function SayLastDigit(number) {
+            var digit = Math.abs(number%10);
+            switch (digit) {
+                case 0: jsConsole.writeLine(number+" -->last digit is zero", number); break;
+                case 1: jsConsole.writeLine(number + "-->last digit is one", number); break;
+                case 2: jsConsole.writeLine(number + "-->last digit is two", number); break;
+                case 3: jsConsole.writeLine(number + "-->last digit is three", number); break;
+                case 4: jsConsole.writeLine(number + "-->last digit is four", number); break;
+                case 5: jsConsole.writeLine(number + "-->last digit is five", number); break;
+                case 6: jsConsole.writeLine(number + "-->last digit is six", number); break;
+                case 7: jsConsole.writeLine(number + "-->last digit is seven", number); break;
+                case 8: jsConsole.writeLine(number + "-->last digit is eight", number); break;
+                case 9: jsConsole.writeLine(number + "-->last digit is nine", number); break;
+                default:jsConsole.writeLine("Such digit does not exist!")
+            }
+        }
+            
+    </script>
+</body>
+</html>

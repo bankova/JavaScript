@@ -1,0 +1,50 @@
+﻿<!--Write a function that finds all the occurrences of word in a text
+The search can case sensitive or case insensitive
+Use function overloading
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Count words</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var text = "We are living in an yellow submarine. In the sky there are no clouds. So we are drinking all the day. We will move out of it in 5 days.";
+        var wordToSearch = " in ";
+        var isCaseSensitive = false;
+
+        CountOccurenceWord(text, wordToSearch);
+        CountOccurenceWord(text, wordToSearch, true);
+
+        function CountOccurenceWord(text, wordToSearch, isCaseSensitive) {
+            isCaseSensitive = isCaseSensitive || false;
+            var countSearchedWord = 0;
+
+            if (isCaseSensitive === false) {
+                var strArr = text.split(wordToSearch); //split is case-insensitive
+
+                for (var str in strArr) {
+                    countSearchedWord++;
+                }
+                jsConsole.writeLine("The count of word '" + wordToSearch + "' (case-insensitive search)  is: " + countSearchedWord)
+            }
+            else {
+                var index = text.indexOf(wordToSearch);//indexOf is case-sensitive
+
+                while (index >= 0) {
+                    countSearchedWord++;
+                    index = text.indexOf(wordToSearch, index+1);
+                }
+                jsConsole.writeLine("The count of word '" + wordToSearch + "' (case-sensitive search)  is: " + countSearchedWord)
+            }
+        }
+       
+    </script>
+</body>
+</html>

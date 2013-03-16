@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{05192C6B-61A3-440C-9A82-97C918784DAD}"
+	ProjectSection(SolutionItems) = preProject
+		01. LastDigit.html = 01. LastDigit.html
+		02.ReverseDigits.html = 02.ReverseDigits.html
+		03.CountOccurences.html = 03.CountOccurences.html
+		04. CountDivs.html = 04. CountDivs.html
+		05. CountNumberInArray.html = 05. CountNumberInArray.html
+		06. BiggerThanNeighbours.html = 06. BiggerThanNeighbours.html
+		07.FirstBiggerThanNeighbours.html = 07.FirstBiggerThanNeighbours.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

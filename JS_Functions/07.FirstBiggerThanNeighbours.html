@@ -1,0 +1,47 @@
+﻿<!--Write a Function that returns the index of the first element in array that is bigger than its neighbors, or -1, if there’s no such element.
+Use the function from the previous exercise.
+-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Find First Bigger than Neighbours</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var testArray = new Array(2, 5, 6, 7, 2, 2, 6);
+        var position;
+
+         printArray(testArray);
+
+         FindFirstBigger(testArray);
+
+         function FindFirstBigger(testArray) {
+             for (position = 0; position < testArray.length; position++) {
+                 if (checkIfBiggerThanNeighbours(testArray, position) >= 0) {
+                     jsConsole.writeLine("The element " + testArray[position] + " at position " + position + " is FIRST bigger than its neighbours.")
+                     return;
+                 }
+                 else if (position === testArray.length - 1) {
+                     jsConsole.writeLine("-1"+"   There is no element bigger than its neighbours !");
+                 }
+             }
+         }
+        function checkIfBiggerThanNeighbours(testArr, position) {
+            if ((testArray.length === 1) || (position === 0 && testArray[position] > testArray[position + 1]) ||
+            (position === testArray.length - 1 && testArray[position] > testArray[position - 1]) ||
+            ((position > 0 && position < testArray.length - 1) &&
+            (testArray[position] > testArray[position - 1]) && (testArray[position] > testArray[position + 1]))) {
+            return position;
+            }
+        }
+        function printArray(testArr) {
+            jsConsole.writeLine("The array is: " + testArr.join(","));
+        }
+    </script>
+</body>
+</html>

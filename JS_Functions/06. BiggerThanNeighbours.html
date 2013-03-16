@@ -1,0 +1,38 @@
+﻿<!--Write a function that checks if the element at given position in given array of integers is bigger than its two neighbors 
+(when such exist).-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Check if Bigger</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var testArray = new Array(2, 5, 6, 7, 2, 2, 6);
+        var position = 3;
+
+        printArray(testArray);
+        checkIfBiggerThanNeighbours(testArray, position);
+
+        function checkIfBiggerThanNeighbours(testArr, position) {
+            if ((testArray.length == 1) || (position == 0 && testArray[position] > testArray[position + 1]) ||
+            (position == testArray.length - 1 && testArray[position] > testArray[position - 1]) ||
+            ((position > 0 && position < testArray.length - 1) &&
+            (testArray[position] > testArray[position - 1]) && (testArray[position] > testArray[position + 1]))) {
+                jsConsole.writeLine("The element "+ testArray[position]+ " at position " +position+" IS bigger than its neighbours.");
+
+            }
+            else {
+                jsConsole.writeLine("The element " + testArray[position] + " at position " + position + " is NOT bigger than its neighbours.");
+            }
+        }
+        function printArray(testArr) {
+            jsConsole.writeLine("The array is: " + testArr.join(","));
+        }
+    </script>
+</body>
+</html>
