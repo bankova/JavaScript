@@ -1,0 +1,84 @@
+﻿<!--Write a function that groups an array of persons by age, first or last name. The function must return an associative array,
+with keys - the groups, and values -arrays with persons in this groups
+Use function overloading (i.e. just one function)
+
+var persons = {…};
+var groupedByFname = group(persons,"firstname");
+var groupedByAge= group(persons,"age");
+
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Associative Array</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+    //function for building Person as object
+
+        function Person(firstName, lastName, age) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.age = age;
+            this.toString = function () {
+                return "Firstname: "+this.firstName+" LastName: "+ this.lastName+" Age: " +this.age;
+            }
+        }
+
+        //make groups
+        function group(people, prop) {
+            switch (prop) {
+                case "firstName":
+                case "lastName":
+                case "age":
+                    {
+                        var groups = {}; //new empty object
+
+                        people.map(function (p) {
+                            if (!groups[p[prop]])
+                                groups[p[prop]] = new Array();
+                            groups[p[prop]].push(p);
+                        });
+
+                        return groups;
+                    }
+                default:
+                    throw new Error("No such property in Person.");
+            }
+        }
+
+        var people = [];
+
+        people.push(new Person("Petar", "Ivanov", 52));
+        people.push(new Person("Petar", "Krastev", 39));
+        people.push(new Person("Konstantin", "Krastev", 57));
+        people.push(new Person("Michael", "Jackson", 52));
+
+        //test function
+        var groups = group(people, "firstName");
+        printGroup(groups);
+        groups = group(people, "lastName");
+        printGroup(groups);
+        groups = group(people, "age");
+        printGroup(groups);
+
+
+        //print result
+            function printGroup(groups) {
+                for (var entry in groups) {
+                    jsConsole.writeLine("Group key: ");
+                    jsConsole.writeLine(entry);
+                    jsConsole.writeLine(" People: " + groups[entry]);
+                    jsConsole.writeLine();
+                }
+            }
+    </script>
+</body>
+</html>

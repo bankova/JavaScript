@@ -1,0 +1,18 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1344B018-F74E-4CD7-B8FA-C888B33B78BD}"
+	ProjectSection(SolutionItems) = preProject
+		01. WorkingWithShapes.html = 01. WorkingWithShapes.html
+		02. RemoveElements.html = 02. RemoveElements.html
+		03. DeepCopy.html = 03. DeepCopy.html
+		04. CheckIfContainsProperty.html = 04. CheckIfContainsProperty.html
+		05. FindYoungest.html = 05. FindYoungest.html
+		06.AssociativeArray.html = 06.AssociativeArray.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

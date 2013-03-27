@@ -1,0 +1,56 @@
+﻿<!--Write functions for working with shapes in  standard Planar coordinate system
+Points are represented by coordinates P(X, Y)
+Lines are represented by two points, marking their beginning and ending
+L(P1(X1,Y1),P2(X2,Y2))
+Calculate the distance between two points
+Check if three segment lines can form a triangle
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Working with shapes</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var line1 = { Point1: { X: 0, Y: 3 }, Point2: { X: 5, Y: 0} };
+        var line2 = { Point1: { X: 0, Y: 3 }, Point2: { X: 2, Y: -2} };
+        var line3 = { Point1: { X: 2, Y: -2 }, Point2: { X: 5, Y: 0} };
+
+        jsConsole.writeLine("The Distance between points of line 1 is:" +
+        Math.round(calculateDistanceTwoPoints(line1.Point1, line1.Point2) * 100) / 100); //useful link for rounding in java http://www.javascriptkit.com/javatutors/round.shtml
+
+        jsConsole.writeLine("The Distance between points of line 2 is:" +
+        Math.round(calculateDistanceTwoPoints(line2.Point1, line2.Point2) * 100) / 100);
+
+        jsConsole.writeLine("The Distance between points of line 3 is:" +
+        Math.round(calculateDistanceTwoPoints(line3.Point1, line3.Point2) * 100) / 100);
+
+        jsConsole.writeLine("Can our three segment lines form a triangle?");
+        checkIfCanFormTriangel(line1, line2, line3);
+
+        function calculateDistanceTwoPoints(Point1, Point2) {
+            var distance = Math.sqrt((Point1.X - Point2.X) * (Point1.X - Point2.X) + (Point1.Y - Point2.Y) * (Point1.Y - Point2.Y));
+            return distance;
+        }
+        function checkIfCanFormTriangel(line1, line2, line3) {
+
+            var line1Len = calculateDistanceTwoPoints(line1.Point1, line1.Point2);
+            var line2Len = calculateDistanceTwoPoints(line2.Point1, line2.Point2);
+            var line3Len = calculateDistanceTwoPoints(line3.Point1, line3.Point2);
+
+            if (line1Len < line2Len + line3Len && line2Len < line1Len + line3Len && line3Len < line2Len + line1Len) {
+                jsConsole.write("True");
+            }
+            else {
+                jsConsole.write("False");
+            }
+        }  
+    </script>
+</body>
+</html>
