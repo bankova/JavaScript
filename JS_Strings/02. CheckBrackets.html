@@ -27,7 +27,7 @@ Example of incorrect expression: )(a+b)).
 
         function checkBrackets(input) {
             var countBrackets = 0;  
-            for (var i = 0; i < correctExpression.length; i++) {
+            for (var i = 0; i < input.length; i++) {
                 if (input[i] == "(") {  //if we have opening bracket it`s OK
                     countBrackets++;
                 }
