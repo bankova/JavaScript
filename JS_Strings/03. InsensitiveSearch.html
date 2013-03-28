@@ -1,0 +1,30 @@
+﻿<!--Write a JavaScript function that finds how many times a substring is contained in a given text (perform case insensitive search).
+		Example: The target substring is "in". The text is as follows:
+We are living in an yellow submarine. We don't have anything else. Inside the submarine is very tight. So we are drinking all the day. We will move out of it in 5 days.
+The result is: 9
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Search</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var input = "We are living in an yellow submarine. We don't have anything else. Inside the submarine is very tight. So we are drinking all the day. We will move out of it in 5 days.";
+        var searchStr = new RegExp("in","gi"); //i in gi means insensitive search, g means Perform a global match (find all matches rather than stopping after the first match)
+       
+        jsConsole.writeLine(countOccurences(input,searchStr));
+
+        function countOccurences(input, searchedStr) {
+            return input.match(searchStr).length; //match is built-in function
+        }
+        //more info here http://www.w3schools.com/jsref/jsref_obj_regexp.asp
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+﻿<!--Write a function that replaces non breaking white-spaces in a text with &nbsp;
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>White Spaces</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var input = "Nice blue sky and warm sun shining";
+        jsConsole.writeLine(input);
+
+        var textToReplace = "&amp;nbsp;";  //&amp; displays &, so you can just write &amp;nbsp; to escape &nbsp;
+        jsConsole.writeLine(replaceWhiteSpace(input, textToReplace)); 
+
+        function replaceWhiteSpace(input, textToReplace) {
+            var splittedText = input.split(' ');
+
+            var result = splittedText.join(textToReplace);
+            return result;
+        }
+    </script>
+</body>
+</html>

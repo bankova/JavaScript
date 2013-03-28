@@ -1,0 +1,48 @@
+﻿<!--Write a JavaScript function to check if in a given expression the brackets are put correctly.
+Example of correct expression: ((a+b)/5-d).
+Example of incorrect expression: )(a+b)).
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Check Brackets</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var correctExpression = "((a+b)/5-d)";
+        var incorrectExpression = ")(a+b))";
+
+        jsConsole.writeLine("The brackets in the expression are put correctly: " + correctExpression);
+        jsConsole.writeLine(checkBrackets(correctExpression));
+
+        jsConsole.writeLine("The brackets in the expression are put correctly: " + incorrectExpression);
+        jsConsole.writeLine(checkBrackets(incorrectExpression));
+
+
+        function checkBrackets(input) {
+            var countBrackets = 0;  
+            for (var i = 0; i < correctExpression.length; i++) {
+                if (input[i] == "(") {  //if we have opening bracket it`s OK
+                    countBrackets++;
+                }
+                if (input[i] == ")") {
+                    countBrackets--;  //if we have closing bracket before opening one, it`s a mistake and countBrackets will be<0
+                }
+                if (countBrackets<0) {
+                    return false;  
+                }
+            }
+            if (countBrackets==0) { //if in the end opening and closing brackets are the same number, the brackets are correctly p
+                return true;
+            }
+            return false;
+        }
+    </script>
+</body>
+</html>
