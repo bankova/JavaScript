@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Kaspichan Numbers</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        function Solve(args) {
+            var myNum = parseInt(args[0]);
+            if (myNum === 0) {
+                myNum = "A";
+            }
+            else {
+                return transform(myNum);
+            }
+        }
+
+        function transform(num) {
+            var arr = generateArray();
+
+            var kaspichanNum = "";
+
+            while (num !== 0) {
+                kaspichanNum = arr[num % 256] + kaspichanNum;
+                num = parseInt(num / 256);
+            }
+            return kaspichanNum;
+        }
+
+        function generateArray() {
+            var array = new Array(256);
+            var arrLen = array.length;
+            var i = 0;
+            var letter = "abcdefghijklmnopqrstuvwxyz";
+            var capletter = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+            for (i = 0; i < arrLen; i++) {
+                array[i] = 0;
+                if (i < 26) {
+                    array[i] = capletter[i];
+                }
+                else {
+                    array[i] = letter[Math.floor(i / 26) - 1] + (capletter[i % 26]);
+                }
+            }
+            return array;
+        }
+        jsConsole.writeLine(Solve(["180"]));
+    </script>
+</body>
+</html>
