@@ -1,0 +1,41 @@
+﻿<!--Write a function that extracts the content of a html page given as text. The function should return
+ anything that is in a tag, without the tags:
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Extract text</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var text = "<html><head><title>Sample site</title></head><body><div>text<div>more text</div>and more...</div>in body</body></html>";
+        jsConsole.writeLine(extractContent(text));
+
+        function extractContent(text) {
+            var result = "";
+            var countOfOpenedTags = 0;
+
+            for (var i = 0; i < text.length; i++) {
+                if (text[i] === "<") {
+                    countOfOpenedTags++;
+                    continue; //don`t print <
+                }
+                if (text[i] === ">") {
+                    countOfOpenedTags--;
+                    continue; //don`t print >
+                }
+                if (countOfOpenedTags == 0) {
+                    result=result+text[i];
+                }
+            }
+            return result;
+        }
+    </script>
+</body>
+</html>
