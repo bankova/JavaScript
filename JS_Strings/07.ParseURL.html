@@ -1,0 +1,48 @@
+﻿<!--Write a script that parses an URL address given in the format:
+and extracts from it the [protocol], [server] and [resource] elements.
+ Return the elements in a JSON object.For example from the URL http://www.devbg.org/forum/index.php the following information should be extracted:
+{protocol: "http", server: "www.devbg.org", 
+ resource: "/forum/index.php"}
+
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>ParseURL</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        var address = "http://www.devbg.org/forum/index.php";
+      
+        jsConsole.writeLine(parseURLAddress(address));
+
+        function parseURLAddress(address){
+        var protocol = address.substring(0, address.indexOf(":"));
+        var server = address.substring(address.indexOf(":") + 3, address.indexOf("/", address.indexOf(":") + 3));
+        var resource = address.substr(address.indexOf("/", address.indexOf(":") + 3));
+
+        var testAddress = new buildAddress(protocol, server, resource);
+        return testAddress;
+       }
+
+        function buildAddress(protocol, server, resource) {
+            return {
+                protocol: protocol,
+                server: server,
+                resource: resource,
+                toString: function () {
+                    return '{protocol: "'+this.protocol+'", server: "' + this.server+'", resource: "' + this.resource+'"}';
+                }
+            }
+        }
+        //var protocol = address.match(/(.*):/)[1];
+    </script>
+</body>
+</html>

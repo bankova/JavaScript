@@ -1,0 +1,41 @@
+﻿<!--Write a function that formats a string using placeholders:The function should work with up to 30 placeholders and all types
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Replace Tags</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var str = stringFormat("Hello {0}!", "Peter");
+        jsConsole.writeLine(str);
+
+        var format = "{0}, {1}, {0} text {2}";
+        str = stringFormat(format, 1, "Pesho", "Gosho");
+        jsConsole.writeLine(str);
+
+
+        function stringFormat(value, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9,
+        arg10,arg11,arg12,arg13,arg14,arg15,arg16,arg17,arg18,arg19,arg20,arg21,arg22,arg23,arg24,arg25,
+        arg26,arg27,arg28,arg29) {
+            var result = value;
+
+            for (var i = 0, len = arguments.length; i < len - 1; i++) {
+                var pattern = "\\{" + i + "\\}";
+                var regex = new RegExp(pattern, "g");
+
+                result = result.replace(regex, arguments[i + 1]);
+            }
+
+            return result;
+        }
+
+    </script>
+</body>
+</html>

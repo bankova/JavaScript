@@ -1,0 +1,41 @@
+﻿<!--Write a program that extracts from a given text all palindromes, e.g. "ABBA", "lamal", "exe".
+-->
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Palindromes</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+        var text = "Nice blue sky. No exe or lamal flying in the sky. ABBA will  come in Bulgaria soon.";
+
+        jsConsole.writeLine(findPalindromes(text));
+
+        function findPalindromes(text) {
+            var palindromesArr = new Array();
+            var words = text.split(' ');
+
+            for (var k = 0; k < words.length;k++) {
+                var isPalindrome = true;
+                for (var i = 0; i < words[k].length / 2; i++) {
+                    if (words[k][i] !== words[k][words[k].length - 1 - i]) {
+                        isPalindrome = false;
+                        break;
+                    }
+                }
+                if (isPalindrome==true && words[k]!=='') {
+                    palindromesArr.push(words[k]);
+                }
+            }
+            return palindromesArr;
+        }
+
+    </script>
+</body>
+</html>
