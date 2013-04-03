@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Sequences</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body onload="HandleInput()">
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        function Solve(args) {
+
+        //read input data
+            var countNumbers = parseInt(args[0]);
+            var inputLines = new Array(countNumbers);
+            var i;
+            for (i = 0; i < countNumbers; i++) {
+                inputLines[i] = parseInt(args[i + 1]);
+            }
+            
+            //call function to count the sequences
+            var endCount = countSequences(countNumbers, inputLines);
+            return endCount;
+        }
+        function countSequences(countNumbers, inputLines) {
+            //declaration of counters
+            var j;
+            var countSequences = 0;
+
+            for (j = 1; j < countNumbers; j++) {
+                if (inputLines[j] < inputLines[j - 1]) { //check if the sequence is non-decreasing
+                    countSequences++;
+                }
+                if (j == countNumbers - 1) {
+                    countSequences++;
+                }
+            }
+            return countSequences;
+        }
+        //hardcoded test data
+        function HandleInput() {
+            var args = [];
+            args[0] = "9";
+            args[1] = "1";
+            args[2] = "8";
+            args[3] = "8";
+            args[4] = "7";
+            args[5] = "6";
+            args[6] = "5";
+            args[7] = "7";
+            args[8] = "7";
+            args[9] = "6";
+          
+          jsConsole.writeLine(Solve(args));
+        }
+    </script>
+</body>
+</html>
