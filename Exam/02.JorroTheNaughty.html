@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Jorro the Naugthy</title>
+    <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body onload="HandleInput()">
+    <div id="js-console"></div>
+    
+    <script src="scripts/js-console.js"></script>
+    <script>
+
+        function Solve(args) {
+
+            //handle input data
+            var firstLine = args[0].split(' ');
+            var rows = parseInt(firstLine[0]);
+            var cols = parseInt(firstLine[1]);
+            var jumps = parseInt(firstLine[2]);
+            
+            var secondLine = args[1].split(' ');
+
+            var startRow = parseInt(secondLine[0]);
+            var startCol = parseInt(secondLine[1]);
+
+            var inputLines = new Array(jumps);
+            
+            //input jumps matrix
+            var matrixJumps = [];
+            var currRow;
+            var currCol;
+
+            for (var i = 0; i < jumps; i++) {
+                inputLines[i] = args[i + 2].split(' ');
+                currRow = parseInt(inputLines[i][0]);
+                currCol = parseInt(inputLines[i][1]);
+                matrixJumps.push([currRow, currCol]);
+            }
+
+            //fill value matrix with 1,2,3...     
+            var matrixValues = fillValueMatrix(rows, cols);
+
+            //fill bool matrix visited cells with false
+            var visited = fillVisitedMatrix(rows, cols);
+
+            var sum = 0;
+            var jumpsCount = 0;
+            var isCaught = false;
+            var hasEscaped = false;
+
+            while (isCaught == false && hasEscaped == false) {
+                for (var i = 0; i < jumps; i++) {
+                    if (startRow >= rows || startCol >= cols || startRow < 0 || startCol < 0) { //out of range index==escaped
+                        hasEscaped = true;
+                        break;
+                    }
+                    if (!visited[startRow][startCol]) { //if the cell has not been visited
+                        visited[startRow][startCol] = true;
+                        jumpsCount++;
+                        sum = sum + matrixValues[startRow][startCol];
+
+                        startRow = startRow + matrixJumps[i][0];
+                        startCol = startCol + matrixJumps[i][1];
+                    }
+                    else { // if the cell has been visited before
+                        isCaught = true;
+                        break;
+                    }
+                }
+            }
+            if (hasEscaped) {
+                return "escaped " + sum;
+            }
+            else {
+                return "caught " + jumpsCount;
+            }
+        }
+        function fillVisitedMatrix(rows, cols) {
+            var visited = [];
+            for (var j = 0; j < rows; j++) {
+                visited[j] = new Array(rows);
+                for (var k = 0; k < cols; k++) {
+                    visited[j][k] = false;
+                }
+            }
+            return visited;
+        }
+
+        function fillValueMatrix(rows, cols) {
+            var matrixValues = [];
+            var value = 1;
+            for (var j = 0; j < rows; j++) {
+                matrixValues[j] = new Array(rows);
+                for (var k = 0; k < cols; k++) {
+                    matrixValues[j][k] = value;
+                    value++;
+                }
+            }
+            return matrixValues;
+        }
+        function HandleInput() {
+            var args = [];
+            args[0] = "3 3 2";
+            args[1] = "0 0";
+            args[2] = "1 1";
+            args[3] = "-1 -1";
+
+            jsConsole.writeLine(Solve(args));
+        }
+    </script>
+</body>
+</html>
