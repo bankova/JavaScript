@@ -1,0 +1,51 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Write a script that creates 5 div elements and moves them in circular path with interval of 100 milliseconds
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Divs Circular Path</title>
+    <script type='text/javascript' src='http://code.jquery.com/jquery-1.8.3.js'></script>    
+</head>
+<body>
+    <div id="wrapper">
+        <div class="divRotate"></div>
+        <div class="divRotate"></div>
+        <div class="divRotate"></div>
+        <div class="divRotate"></div>
+        <div class="divRotate"></div>
+    </div>
+	<script type='text/javascript'>
+	    $(window).load(function () {
+
+	        var divsInDiv = document.querySelectorAll('.divRotate');
+
+	        for (var i = 0; i < divsInDiv.length; i++) {
+	            divsInDiv[i].style.position = 'absolute';
+	            divsInDiv[i].style.backgroundColor = 'green';
+	            divsInDiv[i].style.borderRadius = '50px';
+	            divsInDiv[i].style.width = '50px';
+	            divsInDiv[i].style.height = '50px';
+	            divsInDiv[i].style.display = 'block';
+	        }
+
+	        var txt = $('#wrapper .divRotate'), txtLen = txt.size();
+	        // function to convert degrees to radians    
+	        var degToRad = function (a) { return a * Math.PI / 180.0; }
+	        // rotation settings
+	        var angle = 0, speed = 1, delay = 10, r = 200;
+
+	        (function rotate() {
+	            for (var i = 0; i < txtLen; i++) {
+	                var a = angle + (i * 360 / txtLen);
+
+	                $(txt[i]).css({ top: r + (Math.sin(degToRad(a)) * r), left: r + (Math.cos(degToRad(a)) * r) });
+	            }
+	            // increment our angle and use a modulo so we are always in the range [0..360] degrees
+	            angle = (angle + speed) % 360;
+	            // after a slight delay, call the same function again
+	            setTimeout(rotate, delay);
+	        })();  
+	    });
+    </script>
+</body>
+</html>

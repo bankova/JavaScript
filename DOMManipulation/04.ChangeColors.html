@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Create a text area and two inputs with type="color"
+Make the font color of the text area as the value of the first color input
+Make the background color of the text area as the value of the second input
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Change Colors</title>
+</head>
+<body>
+	<script>
+	    var body=document.body;
+
+	    var textArea = document.createElement('textarea');
+	    textArea.id = 'textArea';
+	    textArea.textContent = 'Hello!';
+
+	    var inputColorFont = document.createElement('input');
+	    inputColorFont.type = 'color';
+	    inputColorFont.id = 'inputColorFont';
+	    inputColorFont.onchange = changeTextFontColor;
+
+	    var inputColorBackground = document.createElement('input');
+	    inputColorBackground.type = 'color';
+	    inputColorBackground.id = 'inputColorBackground';
+	    inputColorBackground.onchange = changeBackgroundColor;
+
+	    body.appendChild(textArea);
+	    body.appendChild(inputColorFont);
+	    body.appendChild(inputColorBackground);
+
+	    function changeTextFontColor() {
+	        return textArea.style.color = document.getElementById('inputColorFont').value;
+	    }
+
+	    function changeBackgroundColor() {
+	        textArea.style.backgroundColor = document.getElementById('inputColorBackground').value;
+	    }
+    </script>
+
+</body>
+</html>
