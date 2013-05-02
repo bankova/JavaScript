@@ -1,0 +1,285 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--Write a hierarchy of classes to simulate vehicles
+All vehicles should have speed and propulsion units (things which make them move) and a Accelerate method,
+which should update their speed by summing it with the acceleration of their propulsion units
+Each propulsion unit can produce acceleration (change in speed). There should be three types of propulsion 
+units - wheels, propelling nozzles and propellers
+A wheel should have a radius and the acceleration it produces should be equal to its perimeter
+A propelling nozzle should have power and an afterburner switch. The acceleration the nozzle should produce
+as much acceleration as it has power, but if the afterburner is on it should produce double acceleration.
+A propeller should have a number of fins and a spin direction. The acceleration a propeller produces should 
+by default be equal to the number of fins it has. The spin direction should be clockwise and counter-clockwise.
+If the spin direction is counter-clockwise, the acceleration the propeller produces should be negative, if the 
+spin direction is clockwise, the acceleration should be positive.
+There should be land, air and water vehicles. Land vehicles should have 4 wheels, air vehicles should
+have 1 propelling nozzles and water vehicles should have a customizable number of propellers (passed in the constructor). 
+Air vehicles should have the ability to switch on/off their afterburners.
+Water vehicles should have the ability to change the spin direction of their propellers.
+Implement one additional amphibious vehicle. It should both have a propeller (so it can move on water) 
+and wheels (so it can move on land). The amphibious vehicle should be able to switch between land and 
+water mode and it's speed property and Accelerate method should respectively depend on its wheels in the first 
+case and on its propeller in the second case-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Vehicles</title>
+        <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+	<script>
+	    var vehiclesNS = (function () {
+
+	        // enumerations
+	        // for more info see here http://stackoverflow.com/questions/287903/enums-in-javascript/5040502#5040502
+	        var AfterburnerSwitch = Object.freeze({
+	            "ACTIVATED": 1,
+	            "DEACTIVATED": 2
+	        });
+
+	        var RotationDirection = Object.freeze({
+	            "CLOCKWISE": 1,
+	            "COUNTERCLOCKWISE": 2
+	        });
+
+	        var AmphibianMode = Object.freeze({
+	            "LAND": 1,
+	            "WATER": 2
+	        });
+
+	        // functions from demos
+            // simple inheritance
+	        Function.prototype.inherits = function (parent) {
+	            this.prototype = new parent();
+	            this.prototype.constructor = parent;
+	        };
+
+            // multiple inheritance
+	        Function.prototype.extend = function (parent) {
+	            for (var i = 1; i < arguments.length; i += 1) {
+	                var name = arguments[i];
+	                this.prototype[name] = parent.prototype[name];
+	            }
+
+	            return this;
+	        }
+
+	        // "abstract" propulsion unit.
+	        function PropulsionUnit() {
+	        }
+
+	        PropulsionUnit.prototype.getAcceleration = function () {
+	        }
+
+	        // Wheel inherits PropulsionUnit.
+	        function Wheel(radius) {
+	            this.radius = radius;
+	        }
+
+	        Wheel.inherits(PropulsionUnit);
+
+	        // wheel implements the abstract method getAcceleration
+	        Wheel.prototype.getAcceleration = function () {
+	            return parseInt(2 * Math.PI * this.radius);
+	        }
+
+	        // PropellingNozzle inherits PropulsionUnit.
+	        function PropellingNozzle(power, afterburnerSwitch) {
+	            this.power = power;
+	            this.afterburnerSwitch = afterburnerSwitch;
+	        }
+
+	        PropellingNozzle.inherits(PropulsionUnit);
+
+	        PropellingNozzle.prototype.getAcceleration = function () {
+	            if (this.afterburnerSwitch === AfterburnerSwitch.ACTIVATED) {
+	                return 2 * this.power;
+	            } else {
+	                return this.power;
+	            }
+	        }
+
+	        // Propeller inherits PropulsionUnit.
+	        function Propeller(finsNumber, rotationDirection) {
+	            this.finsNumber = finsNumber;
+	            this.rotationDirection = rotationDirection;
+	        }
+
+	        Propeller.inherits(PropulsionUnit);
+
+	        Propeller.prototype.getAcceleration = function () {
+	            if (this.rotationDirection === RotationDirection.CLOCKWISE) {
+	                return this.finsNumber;
+	            } else {
+	                return this.finsNumber*(-1);
+	            }
+	        }
+
+	        // Vehicle abstract class
+	        function Vehicle(speed, propulsionUnits) {
+	            this.speed = speed;
+	            this.propulsionUnits = propulsionUnits;
+	        }
+
+	        Vehicle.prototype.accelerate = function () {
+	            for (var i = 0, len = this.propulsionUnits.length; i < len; i++) {
+	                this.speed += this.propulsionUnits[i].getAcceleration();
+	            }
+	        }
+
+	        // LandVehicle inherits Vehicle.
+	        function LandVehicle(speed, wheels) {
+	            Vehicle.apply(this, arguments);
+	        }
+
+	        LandVehicle.inherits(Vehicle);
+
+	        // Aircraft inherits Vehicle.
+	        function Aircraft(speed, propellingNozzles) {
+	            Vehicle.apply(this, arguments);
+	        }
+
+	        Aircraft.inherits(Vehicle);
+
+	        Aircraft.prototype.switchAfterburners = function (afterburnerSwitch) {
+	            for (var i = 0, len = this.propulsionUnits.length; i < len; i++) {
+	                if (this.propulsionUnits[i] instanceof PropellingNozzle) {
+	                    this.propulsionUnits[i].afterburnerSwitch = afterburnerSwitch;
+	                }
+	            }
+	        }
+
+	        // Watercraft inherits Vehicle.
+	        function Watercraft(speed, propellers) {
+	            Vehicle.apply(this, arguments);
+	        }
+
+	        Watercraft.inherits(Vehicle);
+
+	        Watercraft.prototype.setPropellersRotationDirection = function (rotationDirection) {
+	            for (var i = 0; i < this.propulsionUnits.length; i++) {
+	                if (this.propulsionUnits[i] instanceof Propeller) {
+	                    this.propulsionUnits[i].rotationDirection = rotationDirection;
+	                }
+	            }
+	        }
+
+	        // Amphibian inherits from Vehicle and extends Watercraft.
+	        function Amphibian(speed, propellers, wheels, mode) {
+
+	            var propulsionUnits = [];
+	            for (var i = 0; i < propellers.length; i++) {
+	                propulsionUnits.push(propellers[i]);
+	            }
+
+	            for (var j = 0; j < wheels.length; j++) {
+	                propulsionUnits.push(wheels[i]);
+	            }
+
+	            Vehicle.call(this, speed, propulsionUnits);
+	            this.mode = mode;
+	        }
+
+	        Amphibian.inherits(Vehicle);
+	        Amphibian.extend(Watercraft, "setPropellersRotationDirection");
+
+	        Amphibian.prototype.accelerate = function () {
+	            if (this.mode === AmphibianMode.LAND) {
+	                for (var i = 0; i < this.propulsionUnits.length; i++) {
+	                    if (this.propulsionUnits[i] instanceof Wheel) {
+	                        this.speed += this.propulsionUnits[i].getAcceleration();
+	                    }
+	                }
+	            } else {
+	                for (var i = 0; i < this.propulsionUnits.length; i++) {
+	                    if (this.propulsionUnits[i] instanceof Propeller) {
+	                        this.speed += this.propulsionUnits[i].getAcceleration();
+	                    }
+	                }
+	            }
+	        }
+
+	        return {
+	            AfterburnerSwitch: AfterburnerSwitch,
+	            RotationDirection: RotationDirection,
+	            AmphibianMode: AmphibianMode,
+	            Wheel: Wheel,
+	            PropellingNozzle: PropellingNozzle,
+	            Propeller: Propeller,
+	            LandVehicle: LandVehicle,
+	            Aircraft: Aircraft,
+	            Watercraft: Watercraft,
+	            Amphibian: Amphibian
+	        };
+	    })();
+
+	    var wheels = [
+            new vehiclesNS.Wheel(10),
+            new vehiclesNS.Wheel(10),
+            new vehiclesNS.Wheel(10),
+            new vehiclesNS.Wheel(10)
+        ];
+
+	    var propellingNozzles = [
+            new vehiclesNS.PropellingNozzle(100, vehiclesNS.AfterburnerSwitch.ACTIVATED)
+        ];
+
+	    var propellers = [
+            new vehiclesNS.Propeller(10, vehiclesNS.RotationDirection.CLOCKWISE),
+            new vehiclesNS.Propeller(10, vehiclesNS.RotationDirection.CLOCKWISE),
+            new vehiclesNS.Propeller(10, vehiclesNS.RotationDirection.CLOCKWISE),
+            new vehiclesNS.Propeller(10, vehiclesNS.RotationDirection.CLOCKWISE),
+            new vehiclesNS.Propeller(10, vehiclesNS.RotationDirection.CLOCKWISE)
+        ];
+
+	    var amphibianPropellers = [
+            new vehiclesNS.Propeller(10, vehiclesNS.RotationDirection.CLOCKWISE)
+        ];
+
+	    var car = new vehiclesNS.LandVehicle(20, wheels);
+	    jsConsole.writeLine("Car speed initially: " + car.speed);
+	    // accelerate the vehicle
+	    car.accelerate();
+	    jsConsole.writeLine("Car speed after acceleration: " + car.speed);
+
+	    var aircraft = new vehiclesNS.Aircraft(1000, propellingNozzles);
+	    jsConsole.writeLine("Aircraft speed initially: " + aircraft.speed);
+	    // accelerate the aircraft with afterburners activated
+	    aircraft.accelerate();
+	    jsConsole.writeLine("Aircraft speed after acceleration with afterburners activated: " + aircraft.speed);
+	    // deactivate the afterburners
+	    aircraft.switchAfterburners(vehiclesNS.AfterburnerSwitch.DEACTIVATED);
+	    aircraft.accelerate();
+	    jsConsole.writeLine("Aircraft speed after acceleration with afterburners deactivated: " + aircraft.speed);
+
+	    var watercraft = new vehiclesNS.Watercraft(25, propellers);
+	    jsConsole.writeLine("Watercraft speed initially: " + watercraft.speed + "mph");
+	    // accelerate the watercraft
+	    watercraft.accelerate();
+	    jsConsole.writeLine("Watercraft speed after acceleration with propellers rotating clockwise: " + watercraft.speed);
+	    // change the propellers rotation direction
+	    watercraft.setPropellersRotationDirection(vehiclesNS.RotationDirection.COUNTERCLOCKWISE);
+	    watercraft.accelerate();
+	    jsConsole.writeLine("Watercraft speed after acceleration with propellers rotating counterclockwise: " + watercraft.speed);
+
+	    var amphibian = new vehiclesNS.Amphibian(5, amphibianPropellers, wheels, vehiclesNS.AmphibianMode.LAND);
+	    jsConsole.writeLine("Amphibian speed initially: " + amphibian.speed);
+	    // accelerate the amphibian
+	    amphibian.accelerate();
+	    jsConsole.writeLine("Amphibian speed after acceleration on land: " + amphibian.speed);
+
+	    // change amphibian mode to water
+	    amphibian.mode = vehiclesNS.AmphibianMode.WATER;
+	    amphibian.accelerate();
+	    jsConsole.writeLine("Amphibian speed after acceleration on water with propellers rotating clockwise: " + amphibian.speed);
+
+	    // change the propellers rotation direction
+	    amphibian.setPropellersRotationDirection(vehiclesNS.RotationDirection.COUNTERCLOCKWISE);
+	    amphibian.accelerate();
+	    jsConsole.writeLine("Amphibian speed after acceleration on water with propellers rotating counterclockwise: " + amphibian.speed);
+    </script>
+</body>
+</html>
