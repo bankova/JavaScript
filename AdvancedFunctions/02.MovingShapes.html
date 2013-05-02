@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Create a module that works with moving div elements. Implement functionality for:
+Add new moving div element to the DOM
+The module should generate random background, font and border colors
+All the div elements are with the same width and height
+The movements of the div elements can be either circular or rectangular
+The elements should be moving all the time
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Moving Shapes</title>
+</head>
+<body>
+    <div id="main">
+        <button onclick="onRectDivClick()">Add div for rectangle movements</button>
+        <button onclick="onCircleDivClick()">Add div for circle movements</button>
+    </div>
+	<script>
+	    var maxWidth = screen.width - 100;
+	    var maxHeight = screen.height - 300;
+
+	    //add element with rectangular movement
+	    function onRectDivClick() {
+	        movingShapes.add("rect");
+	    }
+
+	    //add element with circular movement
+	    function onCircleDivClick() {
+	        movingShapes.add("ellipse");
+	    }
+
+	    var movingShapes = (function () {
+
+	        function addRect() {
+	            var div = makeDivRandomParams();
+	            document.body.appendChild(div);
+	            moveRect(div);
+	        }
+
+	        function addCircle() {
+	            var div = makeDivRandomParams();
+	            document.body.appendChild(div);
+	            moveInCircle(div);
+	        }
+
+	        function moveRect(element) {
+	            var top = 50;
+	            var left = 50;
+	            var topMax = 200;
+	            var topMin = 50;
+	            var leftMax = 200;
+	            var leftMin = 50;
+
+	            setInterval(function () {
+	                if (top <= topMax && left === leftMin) {
+	                    top++;
+	                }
+	                else if (left <= leftMax && top >= topMax) {
+	                    left++;
+	                }
+	                else if (left >= leftMax && top >= topMin) {
+	                    top--;
+	                }
+
+	                else if (top <= topMin && left >= leftMin) {
+	                    left--;
+	                }
+	                element.style.top = top + "px";
+	                element.style.left = left + "px";
+	            }, 5);
+	        }
+
+	        function moveInCircle(element) {
+	            var circleDivRadius = 150;
+	            var circleDivLeftPosition = 500;
+	            var circleDivTopPosition = 200;
+
+	            // custom attribute for angle
+	            element.setAttribute("angleAttr", "0");
+	            element.style.left = "650px";
+	            element.style.top = "200px";
+
+	            setInterval(function () {
+	                var angleInRadians = (element.getAttribute("angleAttr")) * (Math.PI / 180);
+	                var left = circleDivRadius * Math.cos(angleInRadians) + circleDivLeftPosition;
+	                var top = circleDivRadius * Math.sin(angleInRadians) + circleDivTopPosition;
+	                element.style.left = left + "px";
+	                element.style.top = top + "px";
+	                element.attributes.angleAttr.nodeValue++;
+	            }, 5);
+	        }
+
+	        function add(string) {
+	            if (string === "rect") {
+	                addRect();
+	            }
+	            if (string === "ellipse") {
+	                addCircle();
+	            }
+	        }
+
+	        return {
+	            add: add
+	        };
+	    } ());
+
+      function generateRandomColor() {
+          var red = (Math.random() * 256) | 0;
+          var green = (Math.random() * 256) | 0;
+          var blue = (Math.random() * 256) | 0;
+
+          return "rgb(" + red + "," + green + "," + blue + ")";
+     }
+
+      function makeDivRandomParams() {
+          var randomDiv = document.createElement("div");
+
+         //position
+          randomDiv.style.position = "absolute";
+
+          //width and heigth 
+          randomDiv.style.width = "25px";
+          randomDiv.style.height = "25px";
+
+          //text and background style
+          randomDiv.style.backgroundColor = generateRandomColor();
+          randomDiv.style.color = generateRandomColor();
+          randomDiv.innerText = "Hi!";
+          randomDiv.style.textAlign = "center";
+          randomDiv.style.verticalAlign = "middle";
+
+          //border style
+          randomDiv.style.border = "2px" + " solid " + generateRandomColor();
+          randomDiv.style.borderRadius = "40%";
+
+          return randomDiv;
+      }
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Create a module for working to work with DOM. 
+The module should have the following functionality
+Add element to parent element by given selector
+Remove element from the DOM  by given selector
+Attach event to given selector by given event type and event hander
+Add elements to buffer, which appends them to the DOM when 
+their for some selector count becomes 100
+The buffer contains elements for each selector it gets
+Get elements by CSS selector
+The module should reveal only the methods
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>DOM Module</title>
+        <link href="styles/js-console.css" rel="stylesheet" />
+</head>
+<body>
+  <nav id="main-nav">
+        <ul>
+            <li>navItem1</li>
+            <li>navItem2</li>
+            <li>navItem3</li>
+            <li>navItem4</li>
+        </ul>
+    </nav>
+    <a href="#" id="delete-items-button" onclick='domModule.removeElements("ul", "li:first-child")'>
+    Delete navigation items!</a>
+    <div id="main-div"></div>
+    <div id="js-console"></div>
+    <script src="scripts/js-console.js"></script>
+	<script>
+	    var domModule = (function () {
+	        //associative array as buffer, in order to keep trace of each of the selectors
+	        var fragmentsBuffer = {};
+	        var MAX_FRAGMENT_COUNT_OF_SELECTOR = 100;
+
+            //first element matching selector
+	        function getElementBySelector(selector) {
+	            return document.querySelector(selector);
+	        }
+
+            //all elements matching selector
+	        function getElementsBySelector(selector) {
+	            return document.querySelectorAll(selector);
+	        }
+
+	        function addElement(parentSelector, element) {
+	            var parent = getElementBySelector(parentSelector);
+	            parent.appendChild(element);
+	        }
+
+	        function removeElements(parentSelector, childSelector) {
+	            var elementsToRemove = getElementsBySelector(parentSelector + " " + childSelector);
+	            for (var i = 0; i < elementsToRemove.length; i++) {
+	                elementsToRemove[i].parentNode.removeChild(elementsToRemove[i]);
+	            }
+	        }
+
+	        function addHandler(selector, eventType, eventHandler) {
+	            var elements = getElementsBySelector(selector);
+
+	            for (var i = 0, len = elements.length; i < len; i++) {
+	                if (elements[i].addEventListener) {
+	                    elements[i].addEventListener(eventType, eventHandler, false);
+	                } else if (document.attachEvent) {
+	                    elements[i].attachEvent("on" + eventType, eventHandler);
+	                } else {
+	                    elements[i]["on" + eventType] = eventHandler;
+	                }
+	            }
+	        }
+
+	        function appendToBuffer(parentSelector, element) {
+                //if the selector does not exist in the buffer- create it
+                if (!fragmentsBuffer[parentSelector]) {
+	                    fragmentsBuffer[parentSelector] = {
+	                    fragment: document.createDocumentFragment(),
+	                    length: 0
+	                };
+	            }
+
+	            fragmentsBuffer[parentSelector].fragment.appendChild(element);
+	            fragmentsBuffer[parentSelector].length += 1;
+
+	            // the fragment has reached the buffer maximum size per the given selector
+	            if (fragmentsBuffer[parentSelector].length === MAX_FRAGMENT_COUNT_OF_SELECTOR) {
+	                var parent = getElementBySelector(parentSelector);
+	                parent.appendChild(fragmentsBuffer[parentSelector].fragment);
+	                delete fragmentsBuffer[parentSelector];
+	            }
+	        }
+
+	        return {
+	            addElement: addElement,
+	            removeElements: removeElements,
+	            addHandler: addHandler,
+	            appendToBuffer: appendToBuffer
+	        };
+	    })();
+
+        function eventHandler() {
+                    alert("Clicked!");
+                }
+ 
+        var divToAdd = document.createElement("div");
+        divToAdd.innerText = "New Div added!";
+        divToAdd.setAttribute("style", "border: 5px solid green; width:100px; height:100px; font-size: 30px; " +
+                "text-align: center; background-color: orange; width:100px;");
+        domModule.addElement("#main-div", divToAdd);
+
+        domModule.addHandler("#main-div", "click", eventHandler);
+        jsConsole.writeLine('Click on the newly added div! You will see alert "Clicked"');
+
+        //demonstrating the buffer append -> will not append elements if they are less than 100
+        for (var i = 0; i < 101; i += 1) {
+            var divToAdd = document.createElement("div");
+            divToAdd.innerText = "buffer-div";
+            divToAdd.setAttribute("style", "border: 2px solid orange; width:50px; height:50px; float:left;");
+            domModule.appendToBuffer("#main-div", divToAdd);
+        }
+        //remove the first li from ul
+        domModule.removeElements("ul", "li:first-child");
+    </script>
+    <a href="#" id="delete-divs" onclick='domModule.removeElements("div", "div")'>Delete all divs!</a>
+</body>
+</html>
