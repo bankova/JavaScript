@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Create a Simple JS Carousel with N images and two arrows for image control -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Carousel</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+  <style type="text/css">
+    .scrollyCarousel {
+      margin:auto;
+      border-width:5px;
+      border-style:solid;
+      position:relative;
+    }
+    .scrollyCarousel, .scrollyView, .scrollyView .carouselFrame {
+      width:240px;
+      height:240px;
+      overflow:hidden;
+      position:relative;
+    }
+    .scrollyView .carouselFrame {
+      position:absolute;
+      top:0;
+    }
+    .scrollyView .carouselFrame img {
+      position:absolute;
+      left:0;
+      top:0;
+      width:240px;
+      height:240px;
+    }
+    .scrollyView .carouselFrame .carouselFrameTitle {
+      position:absolute;
+      width:100%;
+      height:50px;
+      font-size:43px;
+      letter-spacing:5px;
+      font-weight:bold;
+      text-align:center;
+      color:#ccc;
+      background:#234;
+      border:1px solid #888;
+      border-left:none;
+      border-right:none;
+      bottom:5px;
+      opacity:.4;
+      filter:alpha(opacity=40);
+    }
+    
+    #page_scrolly_left
+    {
+        position: absolute;
+        top:130px;
+        left:400px;
+    }
+    
+     #page_scrolly_right
+    {
+        position: absolute;
+        top:130px;
+        right:400px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="main">
+
+  <div class="scrollyCarousel insetBorderColor">
+    <div id="page_scrolly-view" class="scrollyView">
+      <div class="carouselFrame" style="left:0px;">
+        <img src="images/tigers.png"/>
+      </div>
+      <div class="carouselFrame" style="left:500px;">
+        <img  src="images/lions.png"/>
+      </div>
+      <div class="carouselFrame" style="left:500px;">
+        <img  src="images/horses.png"/>
+      </div>
+      <div class="carouselFrame" style="left:500px;">
+        <img  src="images/squirrel.png"/>
+      </div>
+      </div>
+    </div>
+   <img src="images/arrow-left.png" id="page_scrolly_left"/><div class="arrow towardsFirst gotoPrevious"></div>
+    <img src="images/arrow-right.png" id="page_scrolly_right"/><div class="arrow towardsLast gotoNext"></div>
+  </div>
+  <br/>
+  <script>
+      //Tested with Chrome and Opera
+      // select the divs in which are placed the images, only div with left position 0 will be shown
+      var elements = document.querySelectorAll(".scrollyCarousel .carouselFrame");
+      var len = elements.length;
+      var left = 0;
+      var current = 0;
+      var previous;
+      var next;
+
+      // add event listeners
+      var previousElement = document.getElementById("page_scrolly_left");
+      previousElement.addEventListener("click", onClickShowPrevious, false);
+
+      var nextElement = document.getElementById("page_scrolly_right");
+      nextElement.addEventListener("click", onClickShowNext, false);
+
+      // function declarations
+      function onClickShowPrevious() {
+          //executed only once per click
+          while (true) {
+              current = (current + len) % len;
+              previous = (current - 1 + len) % len;
+              elements[previous].style.left = 0 + "px";
+              elements[current].style.left = 500 + "px";
+              current--;
+              break;
+          }
+      }
+
+      function onClickShowNext() {
+          //executed only once per click
+          while (true) {
+              current = (current + len) % len;
+              next = (current + 1 + len) % len;
+              elements[next].style.left = 0 + "px";
+              elements[current].style.left = 500 + "px";
+              current++;
+              break;
+          }
+      }
+  </script>
+</body>
+</html>

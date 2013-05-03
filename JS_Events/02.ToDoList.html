@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Create a TODO list with the following UI controls
+Form input for new Item
+Button for adding the new Item
+Button for deleting some item
+Show and Hide Button
+ -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>To Do List</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style>
+    ul li
+    {
+        margin:10px;
+        padding:10px;
+        list-style-type:circle;
+    }
+</style>
+</head>
+<body>
+<script src="scripts/domModule.js"></script>
+   <div class="main">   
+   <p><strong>To Do List</strong> </p>
+        
+       <form id="todo">
+           <input id="enter" type="text" name="item" value="555"/>
+           <button id="add"  type="submit">Add the entered new item</button>
+           <button id="remove" >Remove the entered item</button>
+           <button id="showHide" >Show/Hide</button>
+       </form>
+  </div>
+  <div>
+        <ul id="toDoList">   
+            <li>Shopping</li>
+            <li>Cleaning</li>
+            <li>Studying</li>
+            <li>Having fun</li>
+        </ul>
+  </div>
+  <br/>
+  <script>
+      // Tested in Chrome and Opera
+      // I need the parent  - unordered list
+      var uList = document.querySelector("#toDoList");
+
+      // I am attaching the buttons to events
+      var addButton = document.querySelector("#add");
+      addButton.addEventListener("click", addNewListItem, false);
+
+      var removeItemButton = document.getElementById("remove");
+      removeItemButton.addEventListener("click", removeListItem, false);
+
+      var showHideButton = document.getElementById("showHide");
+      showHideButton.addEventListener("click", showHide, false);
+
+      function addNewListItem() {
+          // if event.preventDefault is not applied, browser does not know which event to apply in many cases
+          // see more at  http://www.w3schools.com/jquery/event_preventdefault.asp
+          event.preventDefault();
+          var listItem = document.createElement("li");
+          // get the value from the input text
+          var inputValue = document.getElementById("enter").value;
+          listItem.innerHTML = inputValue;
+          uList.appendChild(listItem);
+      }
+
+      function showHide() {
+          event.preventDefault();
+          var elements = document.querySelectorAll("ul>li");
+          var i = 0;
+          // all visible elements are made invisible, all invisible are made visible
+          for (i = 0; i < elements.length; i++) {
+              if (elements[i].style.display !== "none") {
+                  elements[i].style.display = "none";
+              }
+              else {
+                  elements[i].style.display = "list-item";
+              }
+          }
+      }
+
+      function removeListItem() {
+          event.preventDefault();
+          var valueToRemove = document.getElementById("enter").value;
+          var elementsToRemove = document.querySelectorAll("ul li");
+          var i = 0;
+          // removing all elements with the value to be removed
+          for (i = 0; i < elementsToRemove.length; i++) {
+              if (elementsToRemove[i].innerText === valueToRemove) {
+                  elementsToRemove[i].parentNode.removeChild(elementsToRemove[i]);
+              }
+          }
+      }
+  </script>
+</body>
+</html>
