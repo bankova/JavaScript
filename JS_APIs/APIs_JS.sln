@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D1AE0C82-7E73-40EB-B570-0A3AF88B96FB}"
+	ProjectSection(SolutionItems) = preProject
+		01. Recycle.html = 01. Recycle.html
+		02.StoreScoresRecycleGame.html = 02.StoreScoresRecycleGame.html
+		03.ShimLocalAndSessionStorage.html = 03.ShimLocalAndSessionStorage.html
+		04. DrawBike.html = 04. DrawBike.html
+		04. DrawFaceAndHat.html = 04. DrawFaceAndHat.html
+		04. DrawHouse.html = 04. DrawHouse.html
+		05.BounceBall.html = 05.BounceBall.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

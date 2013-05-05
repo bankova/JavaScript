@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<!--Write a client-side based web application that consists of a trash bucket 
+and lots of trash items in the browser window. Implement the following functionality:
+Drag trash items
+Open the bucket when a trash item is being dragged over it 
+and close when the trash is dragged out of the bucket, or is dropped in the bucket
+To throw a trash item into the bucket, i.e. make it disappear from the browser window-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Recycle bin</title>
+    <style>
+        .container {
+            width: 700px;
+            height: 600px;
+            position:absolute;
+            top:0px;
+            left:150px;
+            padding:10px;
+            margin:5px;
+        }
+
+            .container img{
+                height: 60px;
+                width: 60px;
+                margin:2px;
+            }
+    </style>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("dragged-id", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("dragged-id");
+            var elementToRemove = document.getElementById(data);
+            elementToRemove.parentNode.removeChild(elementToRemove);
+        }
+    </script>
+</head>
+<body>
+    <div class="bin" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <img id="bin-image" alt="trash" src="images/future_trash_closed.png" onmouseover="changeBinState('open')" 
+onmouseout="changeBinState('closed')"/>
+    </div>
+    <div class="container" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <img id="Img8" draggable="true" ondragstart="drag(event)" src="images/trash2.png"/>
+        <img id="Img1" draggable="true" ondragstart="drag(event)" src="images/trash2.png"/>
+        <img id="Img2" draggable="true" ondragstart="drag(event)" src="images/trash2.png"/>
+        <img id="Img3" draggable="true" ondragstart="drag(event)" src="images/trash2.png"/>
+        <img id="Img4" draggable="true" ondragstart="drag(event)" src="images/trash2.png"/>
+        <img id="Img5" draggable="true" ondragstart="drag(event)" src="images/trash2.png"/>
+        <img id="Img6" draggable="true" ondragstart="drag(event)" src="images/trash2.png"/>
+        <img id="Img7" draggable="true" ondragstart="drag(event)" src="images/trash2.png"/>
+        <img id="Img9" draggable="true" ondragstart="drag(event)" src="images/trash2.png"/>
+        <img id="Img10" draggable="true" ondragstart="drag(event)" src="images/trash2.png"/>
+    </div>
+     <script type="text/javascript">
+
+         // change image of the recycle bin
+         var img = document.getElementById("bin-image");
+         function changeBinState(state) {
+             img.src = "images/future_trash_" + state + ".png";
+         }
+
+         (function generateRandomPositionsTrash() {
+             var trashArray = document.querySelectorAll(".container img");
+             var COUNT_TRASH = trashArray.length;
+             for (var i = 0; i < COUNT_TRASH; i++) {
+                 trashArray[i] = generateRandPosition(trashArray[i]);
+             }
+         } ());
+
+         function generateRandPosition(randomImg) {
+             var maxWidth = screen.width - 300;
+             var maxHeight = screen.height - 300;
+             randomImg.style.position = "absolute";
+
+             //position top left
+             var topPos = parseInt((Math.random() * (maxHeight - 100) + 100));
+             randomImg.style.top = topPos + "px";
+             var left = parseInt(Math.random() * (maxWidth - 100) + 100);
+             randomImg.style.left = left + "px";
+
+             return randomImg;
+         }
+    </script>
+</body>
+</html>
