@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Event Model - The Event Object</title>
+	<style>
+h1{
+position:absolute;
+top:410px;
+left:10px;
+}
+#main{
+width:600px;
+height:400px;
+border: 1px solid red;
+float:left;
+}
+#mouseCoordsDiv{
+width:100px;
+height:50px;
+border: 1px solid red;
+float:left;
+}
+</style>
+</head>
+
+<body>
+<div id="main">
+</div>
+<div id="mouseCoordsDiv"></div>
+    <h1>Click in Bigger Red Box to See Mouse Coordinates (Works in Chrome and Opera)</h1>
+    <script type="text/javascript">
+    var mainDiv = document.getElementById("main");
+			mainDiv.addEventListener("click",function(e){
+			if(!e) e = window.event;		
+
+		   var mouseCoords = 'X=' + e.clientX +  ' Y=' + e.clientY ;
+		document.getElementById('mouseCoordsDiv').innerText = mouseCoords;
+		},false);
+</script>
+</body>
+</html>
